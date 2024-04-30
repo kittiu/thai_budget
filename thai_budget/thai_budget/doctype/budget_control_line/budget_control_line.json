@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-28 12:00:39.982017",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "budget_activity",
+  "column_break_tqlp",
+  "budget_amount",
+  "monthly_distribution",
+  "monthly_distribution_section",
+  "p1",
+  "p2",
+  "p3",
+  "column_break_jjjl",
+  "p4",
+  "p5",
+  "p6",
+  "column_break_dsdd",
+  "p7",
+  "p8",
+  "p9",
+  "column_break_bxdl",
+  "p10",
+  "p11",
+  "p12"
+ ],
+ "fields": [
+  {
+   "fieldname": "budget_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Budget Amount",
+   "options": "Company:company:default_currency",
+   "reqd": 1
+  },
+  {
+   "fieldname": "budget_activity",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Budget Activity",
+   "options": "Budget Activity",
+   "reqd": 1
+  },
+  {
+   "depends_on": "monthly_distribution",
+   "fieldname": "monthly_distribution_section",
+   "fieldtype": "Section Break",
+   "label": "Monthly Distribution"
+  },
+  {
+   "fieldname": "column_break_jjjl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dsdd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bxdl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tqlp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "p1",
+   "fieldtype": "Currency",
+   "label": "Month 1"
+  },
+  {
+   "fieldname": "p2",
+   "fieldtype": "Currency",
+   "label": "Month 2"
+  },
+  {
+   "fieldname": "p3",
+   "fieldtype": "Currency",
+   "label": "Month 3"
+  },
+  {
+   "fieldname": "p4",
+   "fieldtype": "Currency",
+   "label": "Month 4"
+  },
+  {
+   "fieldname": "p5",
+   "fieldtype": "Currency",
+   "label": "Month 5"
+  },
+  {
+   "fieldname": "p6",
+   "fieldtype": "Currency",
+   "label": "Month 6"
+  },
+  {
+   "fieldname": "p7",
+   "fieldtype": "Currency",
+   "label": "Month 7"
+  },
+  {
+   "fieldname": "p8",
+   "fieldtype": "Currency",
+   "label": "Month 8"
+  },
+  {
+   "fieldname": "p9",
+   "fieldtype": "Currency",
+   "label": "Month 9"
+  },
+  {
+   "fieldname": "p10",
+   "fieldtype": "Currency",
+   "label": "Month 10"
+  },
+  {
+   "fieldname": "p11",
+   "fieldtype": "Currency",
+   "label": "Month 11"
+  },
+  {
+   "fieldname": "p12",
+   "fieldtype": "Currency",
+   "label": "Month 12"
+  },
+  {
+   "default": "0",
+   "fieldname": "monthly_distribution",
+   "fieldtype": "Check",
+   "label": "Monthly Distribution"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-04-28 14:19:32.119316",
+ "modified_by": "Administrator",
+ "module": "Thai Budget",
+ "name": "Budget Control Line",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
