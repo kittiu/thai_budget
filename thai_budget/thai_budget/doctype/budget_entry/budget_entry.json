@@ -1,0 +1,127 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-06-05 12:39:10.363452",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "voucher_type",
+  "voucher",
+  "voucher_item",
+  "column_break_heql",
+  "analytic_type",
+  "analytic_account",
+  "column_break_oruj",
+  "entry_type",
+  "debit",
+  "credit",
+  "column_break_ehfm",
+  "against_voucher_type",
+  "against_voucher",
+  "against_voucher_item"
+ ],
+ "fields": [
+  {
+   "fieldname": "voucher_type",
+   "fieldtype": "Link",
+   "label": "Voucher Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "voucher",
+   "fieldtype": "Dynamic Link",
+   "label": "Voucher",
+   "options": "voucher_type",
+   "search_index": 1
+  },
+  {
+   "fieldname": "analytic_type",
+   "fieldtype": "Select",
+   "label": "Analytic Type",
+   "options": "Project\nCost Center"
+  },
+  {
+   "fieldname": "analytic_account",
+   "fieldtype": "Dynamic Link",
+   "label": "Analytic Account",
+   "options": "analytic_type",
+   "search_index": 1
+  },
+  {
+   "fieldname": "entry_type",
+   "fieldtype": "Select",
+   "label": "Entry Type",
+   "options": "Budget Plan\nBudget Amount\nPR Commit\nPO Commit\nEX Commit\nAV Commit\nActual Amount"
+  },
+  {
+   "fieldname": "debit",
+   "fieldtype": "Float",
+   "label": "Debit"
+  },
+  {
+   "fieldname": "credit",
+   "fieldtype": "Float",
+   "label": "Credit"
+  },
+  {
+   "fieldname": "against_voucher_type",
+   "fieldtype": "Link",
+   "label": "Against Voucher Type",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "against_voucher",
+   "fieldtype": "Dynamic Link",
+   "label": "Against Voucher",
+   "options": "against_voucher_type"
+  },
+  {
+   "fieldname": "voucher_item",
+   "fieldtype": "Data",
+   "label": "Voucher Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "against_voucher_item",
+   "fieldtype": "Data",
+   "label": "Against Voucher Item",
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_heql",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_oruj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ehfm",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-05 22:50:07.312151",
+ "modified_by": "Administrator",
+ "module": "Thai Budget",
+ "name": "Budget Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

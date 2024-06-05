@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class BLEntry(Document):
+class BudgetEntry(Document):
 	pass
