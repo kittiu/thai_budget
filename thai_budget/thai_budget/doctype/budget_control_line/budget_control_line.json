@@ -8,7 +8,7 @@
  "field_order": [
   "budget_activity",
   "column_break_tqlp",
-  "budget_amount",
+  "amount",
   "monthly_distribution",
   "monthly_distribution_section",
   "p1",
@@ -28,14 +28,6 @@
   "p12"
  ],
  "fields": [
-  {
-   "fieldname": "budget_amount",
-   "fieldtype": "Currency",
-   "in_list_view": 1,
-   "label": "Budget Amount",
-   "options": "Company:company:default_currency",
-   "reqd": 1
-  },
   {
    "fieldname": "budget_activity",
    "fieldtype": "Link",
@@ -131,12 +123,20 @@
    "fieldname": "monthly_distribution",
    "fieldtype": "Check",
    "label": "Monthly Distribution"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Budget Amount",
+   "options": "Company:company:default_currency",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-04-28 14:19:32.119316",
+ "modified": "2024-06-06 16:07:33.924199",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Control Line",

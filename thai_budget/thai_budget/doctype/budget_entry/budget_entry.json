@@ -1,21 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "format:BE{########}",
  "creation": "2024-06-05 12:39:10.363452",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "entry_type",
   "voucher_type",
   "voucher",
   "voucher_item",
-  "column_break_heql",
+  "column_break_oruj",
   "analytic_type",
   "analytic_account",
-  "column_break_oruj",
-  "entry_type",
+  "budget_activity",
+  "column_break_ehfm",
   "debit",
   "credit",
-  "column_break_ehfm",
+  "balance",
+  "column_break_wpvf",
   "against_voucher_type",
   "against_voucher",
   "against_voucher_item"
@@ -25,43 +28,56 @@
    "fieldname": "voucher_type",
    "fieldtype": "Link",
    "label": "Voucher Type",
-   "options": "DocType"
+   "options": "DocType",
+   "reqd": 1
   },
   {
    "fieldname": "voucher",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Voucher",
    "options": "voucher_type",
+   "reqd": 1,
    "search_index": 1
   },
   {
    "fieldname": "analytic_type",
    "fieldtype": "Select",
    "label": "Analytic Type",
-   "options": "Project\nCost Center"
+   "options": "Project\nCost Center",
+   "reqd": 1
   },
   {
    "fieldname": "analytic_account",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Analytic Account",
    "options": "analytic_type",
+   "reqd": 1,
    "search_index": 1
   },
   {
    "fieldname": "entry_type",
    "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Entry Type",
-   "options": "Budget Plan\nBudget Amount\nPR Commit\nPO Commit\nEX Commit\nAV Commit\nActual Amount"
+   "options": "Budget Plan\nBudget Amount\nMR Commit\nPO Commit\nEX Commit\nAV Commit\nActual Amount",
+   "reqd": 1
   },
   {
    "fieldname": "debit",
    "fieldtype": "Float",
-   "label": "Debit"
+   "label": "Debit",
+   "reqd": 1
   },
   {
    "fieldname": "credit",
    "fieldtype": "Float",
-   "label": "Credit"
+   "label": "Credit",
+   "reqd": 1
   },
   {
    "fieldname": "against_voucher_type",
@@ -72,6 +88,8 @@
   {
    "fieldname": "against_voucher",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Against Voucher",
    "options": "against_voucher_type"
   },
@@ -88,24 +106,37 @@
    "search_index": 1
   },
   {
-   "fieldname": "column_break_heql",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "column_break_oruj",
    "fieldtype": "Column Break"
   },
   {
    "fieldname": "column_break_ehfm",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Balance"
+  },
+  {
+   "fieldname": "budget_activity",
+   "fieldtype": "Link",
+   "label": "Budget Activity",
+   "options": "Budget Activity"
+  },
+  {
+   "fieldname": "column_break_wpvf",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-05 22:50:07.312151",
+ "modified": "2024-06-06 17:03:46.498913",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Entry",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

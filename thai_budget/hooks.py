@@ -6,6 +6,23 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
+fixtures = [
+	{
+		"doctype": "Custom Field",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"Purchase Order Item-budget_activity",
+                    "Material Request Item-budget_activity"
+                ]
+            ]
+        ]
+    }
+]
+
+
 # Includes in <head>
 # ------------------
 
@@ -122,13 +139,32 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Budget Control Sheet": {
+        "on_submit": [
+            "thai_budget.controllers.budget_controller.make_budget_entries",
+        ],
+        "on_cancel": [
+            "thai_budget.controllers.budget_controller.clear_budget_entries",
+        ]
+	},
+	"Material Request": {
+        "on_submit": [
+            "thai_budget.controllers.budget_controller.make_budget_entries",
+        ],
+        "on_cancel": [
+            "thai_budget.controllers.budget_controller.clear_budget_entries",
+        ]
+	},
+	"Purchase Order": {
+        "on_submit": [
+            "thai_budget.controllers.budget_controller.make_budget_entries",
+        ],
+        "on_cancel": [
+            "thai_budget.controllers.budget_controller.clear_budget_entries",
+        ]
+	}
+}
 
 # Scheduled Tasks
 # ---------------

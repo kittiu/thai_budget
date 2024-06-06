@@ -14,7 +14,7 @@
   "company",
   "amended_from",
   "naming_series",
-  "budget_amount",
+  "amount",
   "section_break_6",
   "applicable_on_material_request",
   "action_if_annual_budget_exceeded_on_mr",
@@ -28,7 +28,8 @@
   "action_if_annual_budget_exceeded",
   "action_if_accumulated_monthly_budget_exceeded",
   "section_break_21",
-  "budget_control_lines"
+  "items",
+  "connections_tab"
  ],
  "fields": [
   {
@@ -171,12 +172,6 @@
    "set_only_once": 1
   },
   {
-   "fieldname": "budget_control_lines",
-   "fieldtype": "Table",
-   "label": "Budget Control Lines",
-   "options": "Budget Control Line"
-  },
-  {
    "fieldname": "budget_period",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -184,11 +179,6 @@
    "label": "Budget Period",
    "options": "Budget Period",
    "reqd": 1
-  },
-  {
-   "fieldname": "budget_amount",
-   "fieldtype": "Currency",
-   "label": "Budget Amount"
   },
   {
    "fieldname": "analytic_type",
@@ -204,12 +194,31 @@
    "options": "analytic_type",
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "connections_tab",
+   "fieldtype": "Tab Break",
+   "label": "Connections",
+   "show_dashboard": 1
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Budget Control Line",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Budget Amount",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-05 22:15:12.361395",
+ "modified": "2024-06-06 16:06:56.218815",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Control Sheet",
@@ -227,7 +236,7 @@
    "print": 1,
    "read": 1,
    "report": 1,
-   "role": "Accounts Manager",
+   "role": "Employee",
    "share": 1,
    "submit": 1,
    "write": 1
