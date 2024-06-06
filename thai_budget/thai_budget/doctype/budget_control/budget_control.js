@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Ecosoft and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("Budget Control Sheet", {
+frappe.ui.form.on("Budget Control", {
 
     refresh: function (frm) {
         frm.set_query("analytic_account", function () {
@@ -36,6 +36,5 @@ frappe.ui.form.on("Budget Control Sheet", {
     },
 
 
+
 });
-
-

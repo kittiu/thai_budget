@@ -64,7 +64,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Entry Type",
-   "options": "Budget Plan\nBudget Amount\nMR Commit\nPO Commit\nEX Commit\nAV Commit\nActual Amount",
+   "options": "Budget Plan\nBudget Control\nMaterial Request\nPurchase Order\nPurchase Invoice",
    "reqd": 1
   },
   {
@@ -132,7 +132,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-06 17:03:46.498913",
+ "modified": "2024-06-07 00:06:21.005890",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Entry",

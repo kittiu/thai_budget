@@ -4,11 +4,10 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.query_builder import DocType
 
 
+class BudgetControl(Document):
 
-class BudgetControlSheet(Document):
 
 	def before_naming(self):
 		self.naming_series = f"{self.analytic_account}./.{self.budget_period}/.##"
@@ -16,7 +15,7 @@ class BudgetControlSheet(Document):
 	def validate(self):
 		self.validate_company_analytic()
 		self.validate_company_budget_activity()
-		self.update_budget_control_sheet()
+		self.update_budget_control()
 
 	def validate_company_analytic(self):
 		analytic_company = frappe.db.get_value(self.analytic_type, self.analytic_account, "company", cache=True)
@@ -33,5 +32,5 @@ class BudgetControlSheet(Document):
 					_("Budget activity {0} does not belong to company {1}").format(line.budget_activity, self.company),
 				)
 
-	def update_budget_control_sheet(self):
+	def update_budget_control(self):
 		self.amount = sum([line.amount for line in self.items])

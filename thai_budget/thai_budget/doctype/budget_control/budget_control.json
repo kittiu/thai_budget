@@ -1,0 +1,249 @@
+{
+    "actions": [],
+    "allow_import": 1,
+    "autoname": "naming_series:",
+    "creation": "2016-05-16 11:42:29.632528",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+     "analytic_type",
+     "analytic_account",
+     "column_break_3",
+     "company",
+     "budget_period",
+     "amended_from",
+     "naming_series",
+     "amount",
+     "section_break_6",
+     "applicable_on_material_request",
+     "action_if_annual_budget_exceeded_on_mr",
+     "action_if_accumulated_monthly_budget_exceeded_on_mr",
+     "column_break_13",
+     "applicable_on_purchase_order",
+     "action_if_annual_budget_exceeded_on_po",
+     "action_if_accumulated_monthly_budget_exceeded_on_po",
+     "section_break_16",
+     "applicable_on_booking_actual_expenses",
+     "action_if_annual_budget_exceeded",
+     "action_if_accumulated_monthly_budget_exceeded",
+     "section_break_21",
+     "items",
+     "connections_tab"
+    ],
+    "fields": [
+     {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+     },
+     {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "Budget Control",
+      "print_hide": 1,
+      "read_only": 1
+     },
+     {
+      "fieldname": "section_break_6",
+      "fieldtype": "Section Break",
+      "label": "Control Action"
+     },
+     {
+      "default": "0",
+      "fetch_from": "budget_period.applicable_on_material_request",
+      "fetch_if_empty": 1,
+      "fieldname": "applicable_on_material_request",
+      "fieldtype": "Check",
+      "label": "Applicable on Material Request"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Stop",
+      "depends_on": "eval:doc.applicable_on_material_request == 1",
+      "fetch_from": "budget_period.action_if_annual_budget_exceeded_on_mr",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_annual_budget_exceeded_on_mr",
+      "fieldtype": "Select",
+      "label": "Action if Annual Budget Exceeded on MR",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Warn",
+      "depends_on": "eval:doc.applicable_on_material_request == 1",
+      "fetch_from": "budget_period.action_if_accumulated_monthly_budget_exceeded_on_mr",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_accumulated_monthly_budget_exceeded_on_mr",
+      "fieldtype": "Select",
+      "label": "Action if Accumulated Monthly Budget Exceeded on MR",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "fieldname": "column_break_13",
+      "fieldtype": "Column Break"
+     },
+     {
+      "default": "0",
+      "fetch_from": "budget_period.applicable_on_purchase_order",
+      "fetch_if_empty": 1,
+      "fieldname": "applicable_on_purchase_order",
+      "fieldtype": "Check",
+      "label": "Applicable on Purchase Order"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Stop",
+      "depends_on": "eval:doc.applicable_on_purchase_order == 1",
+      "fetch_from": "budget_period.action_if_annual_budget_exceeded_on_po",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_annual_budget_exceeded_on_po",
+      "fieldtype": "Select",
+      "label": "Action if Annual Budget Exceeded on PO",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Warn",
+      "depends_on": "eval:doc.applicable_on_purchase_order == 1",
+      "fetch_from": "budget_period.action_if_accumulated_monthly_budget_exceeded_on_po",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_accumulated_monthly_budget_exceeded_on_po",
+      "fieldtype": "Select",
+      "label": "Action if Accumulated Monthly Budget Exceeded on PO",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "fieldname": "section_break_16",
+      "fieldtype": "Section Break"
+     },
+     {
+      "default": "0",
+      "fetch_from": "budget_period.applicable_on_booking_actual_expenses",
+      "fetch_if_empty": 1,
+      "fieldname": "applicable_on_booking_actual_expenses",
+      "fieldtype": "Check",
+      "label": "Applicable on booking actual expenses"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Stop",
+      "depends_on": "eval:doc.applicable_on_booking_actual_expenses == 1",
+      "fetch_from": "budget_period.action_if_annual_budget_exceeded",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_annual_budget_exceeded",
+      "fieldtype": "Select",
+      "label": "Action if Annual Budget Exceeded on Actual",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "allow_on_submit": 1,
+      "default": "Warn",
+      "depends_on": "eval:doc.applicable_on_booking_actual_expenses == 1",
+      "fetch_from": "budget_period.action_if_accumulated_monthly_budget_exceeded",
+      "fetch_if_empty": 1,
+      "fieldname": "action_if_accumulated_monthly_budget_exceeded",
+      "fieldtype": "Select",
+      "label": "Action if Accumulated Monthly Budget Exceeded on Actual",
+      "options": "\nStop\nWarn\nIgnore"
+     },
+     {
+      "fieldname": "section_break_21",
+      "fieldtype": "Section Break"
+     },
+     {
+      "fieldname": "naming_series",
+      "fieldtype": "Data",
+      "hidden": 1,
+      "label": "Series",
+      "no_copy": 1,
+      "print_hide": 1,
+      "read_only": 1,
+      "set_only_once": 1
+     },
+     {
+      "fieldname": "budget_period",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "label": "Budget Period",
+      "options": "Budget Period",
+      "reqd": 1
+     },
+     {
+      "fieldname": "analytic_type",
+      "fieldtype": "Select",
+      "label": "Analytic Type",
+      "options": "Cost Center\nProject",
+      "reqd": 1
+     },
+     {
+      "fieldname": "analytic_account",
+      "fieldtype": "Dynamic Link",
+      "label": "Analytic Account",
+      "options": "analytic_type",
+      "reqd": 1,
+      "search_index": 1
+     },
+     {
+      "fieldname": "connections_tab",
+      "fieldtype": "Tab Break",
+      "label": "Connections",
+      "show_dashboard": 1
+     },
+     {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "Budget Control Line",
+      "reqd": 1
+     },
+     {
+      "fieldname": "amount",
+      "fieldtype": "Currency",
+      "label": "Budget Amount",
+      "read_only": 1
+     }
+    ],
+    "index_web_pages_for_search": 1,
+    "is_submittable": 1,
+    "links": [],
+    "modified": "2024-06-06 23:32:43.425428",
+    "modified_by": "Administrator",
+    "module": "Thai Budget",
+    "name": "Budget Control",
+    "naming_rule": "By \"Naming Series\" field",
+    "owner": "Administrator",
+    "permissions": [
+     {
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "import": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Employee",
+      "share": 1,
+      "submit": 1,
+      "write": 1
+     }
+    ],
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "track_changes": 1
+   }

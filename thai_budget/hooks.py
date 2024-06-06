@@ -5,7 +5,6 @@ app_description = "Budgeting for Thai Government"
 app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
-
 fixtures = [
 	{
 		"doctype": "Custom Field",
@@ -15,7 +14,8 @@ fixtures = [
 				"in",
 				[
 					"Purchase Order Item-budget_activity",
-                    "Material Request Item-budget_activity"
+                    "Material Request Item-budget_activity",
+                    "Purchase Invoice Item-budget_activity"
                 ]
             ]
         ]
@@ -140,7 +140,7 @@ fixtures = [
 # Hook on document methods and events
 
 doc_events = {
-	"Budget Control Sheet": {
+	"Budget Control": {
         "on_submit": [
             "thai_budget.controllers.budget_controller.make_budget_entries",
         ],
@@ -157,6 +157,14 @@ doc_events = {
         ]
 	},
 	"Purchase Order": {
+        "on_submit": [
+            "thai_budget.controllers.budget_controller.make_budget_entries",
+        ],
+        "on_cancel": [
+            "thai_budget.controllers.budget_controller.clear_budget_entries",
+        ]
+	},
+	"Purchase Invoice": {
         "on_submit": [
             "thai_budget.controllers.budget_controller.make_budget_entries",
         ],
@@ -205,6 +213,13 @@ doc_events = {
 # override_doctype_dashboards = {
 # 	"Task": "thai_budget.task.get_dashboard_data"
 # }
+
+override_doctype_dashboards = {
+	"Budget Control": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_budget_control",
+	"Material Request": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_material_request",
+	"Purchase Order": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_purchase_order",
+	"Purchase Invoice": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_purchase_invoice",
+}
 
 # exempt linked doctypes from being automatically cancelled
 #
