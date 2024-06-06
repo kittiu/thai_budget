@@ -4,7 +4,28 @@ from frappe.model.document import Document
 
 
 class BudgetController(Document):
-    pass
+
+    @property
+    def budget_balance(self):
+        entries = frappe.get_all(
+            "Budget Entry",
+            filters={
+                "entry_type": self.doctype,
+                "voucher_type": self.doctype,
+                "voucher": self.name
+            },
+            pluck="balance",
+        )
+        against = frappe.get_all(
+            "Budget Entry",
+            filters={
+                "entry_type": self.doctype,
+                "against_voucher_type": self.doctype,
+                "against_voucher": self.name
+            },
+            pluck="balance",
+        )
+        return sum(entries + against)
 
 
 def make_budget_entries(doc, method=None):

@@ -15,7 +15,13 @@ fixtures = [
 				[
 					"Purchase Order Item-budget_activity",
                     "Material Request Item-budget_activity",
-                    "Purchase Invoice Item-budget_activity"
+                    "Purchase Invoice Item-budget_activity",
+                    "Material Request-budget_status",
+                    "Material Request-budget_balance",
+                    "Purchase Order-budget_status",
+                    "Purchase Order-budget_balance",
+                    "Purchase Invoice-budget_status",
+                    "Purchase Invoice-budget_balance",
                 ]
             ]
         ]
@@ -131,9 +137,11 @@ fixtures = [
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Material Request": "thai_budget.custom.material_request.MaterialRequestTB",
+	"Purchase Order": "thai_budget.custom.purchase_order.PurchaseOrderTB",
+	"Purchase Invoice": "thai_budget.custom.purchase_invoice.PurchaseInvoiceTB",
+}
 
 # Document Events
 # ---------------
