@@ -6,11 +6,12 @@ from frappe.model.document import Document
 
 
 class BudgetEntry(Document):
-    
+
 	def validate(self):
 		self.update_balance()
 		self.update_date()
-	
+		self.update_voucher_no()
+
 	def update_balance(self):
 		self.balance = self.debit - self.credit
 
@@ -19,12 +20,15 @@ class BudgetEntry(Document):
 		DATES = {
 			"Budget Control": "period_start_date",
 			"Material Request": "transaction_date",
-			"Purhcase Order": "transaction_date",
+			"Purchase Order": "transaction_date",
 			"Purchase Invoice": "posting_date",
 		}
 		self.entry_date = frappe.db.get_value(
 			self.voucher_type, self.voucher, DATES[self.voucher_type]
 		)
+
+	def update_voucher_no(self):
+		self.voucher_no = self.voucher if not self.against_voucher else self.against_voucher
 
 	@property
 	def budget_balance(self):

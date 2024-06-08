@@ -3,7 +3,7 @@
 
 import frappe
 from frappe import _
-from thai_budget.controllers.budget_controller import BudgetController
+from thai_budget.controllers.budget_controller import BudgetController, reset_budget_entries
 
 
 class BudgetControl(BudgetController):
@@ -18,7 +18,6 @@ class BudgetControl(BudgetController):
 
     @property
     def budget_balance(self):
-        """ Override BudgetController.budget_balance """
         return self.get_budget_entries_amount()
 
     def get_budget_entries_amount(self, type="balance"):
@@ -38,16 +37,12 @@ class BudgetControl(BudgetController):
                 "voucher_type": ["!=", self.doctype],
                 "voucher": ["!=", self.name]
             })
-        entries = frappe.get_all(
-            "Budget Entry",
-            filters=filters,
-            pluck="balance",
-        )
+        entries = frappe.get_all("Budget Entry", filters=filters, pluck="balance")
         return sum(entries)
 
     def before_naming(self):
         self.naming_series = f"{self.analytic_account}./.{self.budget_period}/.##"
-	
+
     def validate(self):
         self.validate_company_analytic()
         self.validate_company_budget_activity()
@@ -70,3 +65,7 @@ class BudgetControl(BudgetController):
 
     def update_budget_control(self):
         self.amount = sum([line.amount for line in self.items])
+    
+    @frappe.whitelist()
+    def reset_budget_entries(self):
+        reset_budget_entries(self)

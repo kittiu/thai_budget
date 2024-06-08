@@ -3,6 +3,34 @@
 
 frappe.ui.form.on("Budget Control", {
 
+    refresh: function(frm) {
+        if (frm.doc.docstatus === 1) {
+			frm.add_custom_button(
+				__("View Budget Entry"),
+				function () {
+					frappe.route_options = {
+                        company: frm.doc.company,
+                        entry_type: "Budget Control",
+                        voucher_no: frm.doc.name
+					};
+					frappe.set_route("query-report", "Budget Monitor");
+				},
+            );
+			frm.add_custom_button(
+				__("Reset Budget Entries"),
+				function () {
+					return frappe.call({
+						doc: frm.doc,
+						method: "reset_budget_entries",
+						callback: function () {
+							frm.refresh();
+						},
+					});
+				},
+            );
+        }
+    },
+
     setup: function (frm) {
         frm.set_query("analytic_account", function () {
             return {

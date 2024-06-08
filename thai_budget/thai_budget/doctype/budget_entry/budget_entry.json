@@ -7,9 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "on_document_section",
-  "voucher_type",
   "company",
+  "voucher_no",
   "column_break_lmpg",
+  "voucher_type",
   "voucher",
   "voucher_item",
   "budget_balance",
@@ -203,11 +204,20 @@
    "fieldtype": "Date",
    "label": "Entry Date",
    "reqd": 1
+  },
+  {
+   "description": "Ref Document used for Budget Monitor Report",
+   "fieldname": "voucher_no",
+   "fieldtype": "Data",
+   "label": "Voucher No",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-08 13:42:18.103887",
+ "modified": "2024-06-09 11:06:29.618724",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Entry",

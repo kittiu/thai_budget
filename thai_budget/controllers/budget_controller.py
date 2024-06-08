@@ -40,6 +40,8 @@ def make_budget_entries(doc, method=None):
     Debit: Budget Amount for each line
     Credit: Budget plan for whole document
     """
+    if doc.docstatus != 1:
+        return
     total_debit = 0
     for line in doc.items:
         make_budget_entry(doc, doc.doctype, line=line, debit=line.amount)  # Debit
@@ -59,6 +61,34 @@ def make_budget_entries(doc, method=None):
                 make_budget_entry(doc, entry_type, line=line, against=against, credit=credit_against)  # Credit
             if credit_budget:
                 make_budget_entry(doc, "Budget Control", line=line, credit=credit_budget)
+
+
+def return_budget_balance(doc, method=None):
+    """
+    This function is called when stop the document and want to return budget.
+    1. Find all budget entries for this document
+    2. Reverse all budget entries with budget balance
+    """
+    budget_entries = get_budget_entries(doc, is_consume=True)
+    for be in budget_entries:
+        # Credit remaining
+        doc = frappe.get_doc("Budget Entry", be)
+        return_amount = doc.budget_balance
+        if not return_amount:
+            continue
+        new_doc = frappe.new_doc("Budget Entry")
+        new_doc.update(doc.as_dict())
+        new_doc.name = None
+        new_doc.credit = return_amount
+        new_doc.debit = 0
+        new_doc.insert(ignore_permissions=True)
+        # Debit remaining back to Budget Control
+        new_doc.name = None
+        new_doc.debit = return_amount
+        new_doc.credit = 0
+        new_doc.entry_type = "Budget Control"
+        new_doc.insert(ignore_permissions=True)
+
 
 def make_budget_entry(doc, entry_type, line=None, against={}, debit=0, credit=0):
     if debit == 0 and credit == 0:
@@ -90,14 +120,19 @@ def make_budget_entry(doc, entry_type, line=None, against={}, debit=0, credit=0)
     be.insert(ignore_permissions=True)
 
 
-def get_budget_entries(doc):
+def get_budget_entries(doc, is_consume=False):
+    filters = {
+        "voucher_type": doc.doctype,
+        "voucher": doc.name
+    }
+    # To return only consumed budget entries of this doc
+    if is_consume:
+        filters.update({"entry_type": doc.doctype})
     res = frappe.get_all(
         "Budget Entry",
-        filters={
-            "voucher_type": doc.doctype,
-            "voucher": doc.name
-        },
-        pluck="name")
+        filters=filters,
+        pluck="name"
+    )
     return res
 
 
@@ -105,6 +140,11 @@ def clear_budget_entries(doc, method=None):
     frappe.db.delete("Budget Entry", {
         "name": ["in", get_budget_entries(doc)]
     })
+
+
+def reset_budget_entries(doc, method=None):
+    clear_budget_entries(doc)
+    make_budget_entries(doc)
 
 
 def get_against_voucher(doc, line):
