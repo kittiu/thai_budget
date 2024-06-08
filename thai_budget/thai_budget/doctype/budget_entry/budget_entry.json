@@ -6,21 +6,31 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "entry_type",
+  "on_document_section",
   "voucher_type",
+  "company",
+  "column_break_lmpg",
   "voucher",
   "voucher_item",
-  "column_break_oruj",
+  "budget_balance",
+  "budget_analytic_activity_section",
+  "entry_type",
+  "entry_date",
+  "column_break_betp",
   "analytic_type",
   "analytic_account",
   "budget_activity",
+  "amount_section",
   "column_break_ehfm",
   "debit",
+  "column_break_vlav",
   "credit",
   "balance",
-  "column_break_wpvf",
+  "against_document_section",
   "against_voucher_type",
+  "column_break_wjcv",
   "against_voucher",
+  "column_break_sngb",
   "against_voucher_item"
  ],
  "fields": [
@@ -29,7 +39,9 @@
    "fieldtype": "Link",
    "label": "Voucher Type",
    "options": "DocType",
-   "reqd": 1
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "voucher",
@@ -38,6 +50,7 @@
    "in_standard_filter": 1,
    "label": "Voucher",
    "options": "voucher_type",
+   "read_only": 1,
    "reqd": 1,
    "search_index": 1
   },
@@ -65,6 +78,7 @@
    "in_standard_filter": 1,
    "label": "Entry Type",
    "options": "Budget Plan\nBudget Control\nMaterial Request\nPurchase Order\nPurchase Invoice",
+   "read_only": 1,
    "reqd": 1
   },
   {
@@ -83,7 +97,8 @@
    "fieldname": "against_voucher_type",
    "fieldtype": "Link",
    "label": "Against Voucher Type",
-   "options": "DocType"
+   "options": "DocType",
+   "read_only": 1
   },
   {
    "fieldname": "against_voucher",
@@ -91,23 +106,21 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Against Voucher",
-   "options": "against_voucher_type"
+   "options": "against_voucher_type",
+   "read_only": 1
   },
   {
    "fieldname": "voucher_item",
    "fieldtype": "Data",
    "label": "Voucher Item",
-   "search_index": 1
+   "read_only": 1
   },
   {
    "fieldname": "against_voucher_item",
    "fieldtype": "Data",
    "label": "Against Voucher Item",
+   "read_only": 1,
    "search_index": 1
-  },
-  {
-   "fieldname": "column_break_oruj",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "column_break_ehfm",
@@ -116,8 +129,10 @@
   {
    "fieldname": "balance",
    "fieldtype": "Float",
+   "hidden": 1,
    "in_list_view": 1,
-   "label": "Balance"
+   "label": "Balance",
+   "read_only": 1
   },
   {
    "fieldname": "budget_activity",
@@ -126,13 +141,73 @@
    "options": "Budget Activity"
   },
   {
-   "fieldname": "column_break_wpvf",
+   "depends_on": "eval:!['Budget Plan', 'Budget Control'].includes(doc.entry_type)",
+   "fieldname": "budget_balance",
+   "fieldtype": "Float",
+   "is_virtual": 1,
+   "label": "Item Budget Balance"
+  },
+  {
+   "fieldname": "column_break_betp",
    "fieldtype": "Column Break"
+  },
+  {
+   "description": "This budget entry is consumed againt following budget entry type and analtyic type, i..e, costcenter/project with selected budget activity",
+   "fieldname": "budget_analytic_activity_section",
+   "fieldtype": "Section Break",
+   "label": "Budget / Analytic / Activity"
+  },
+  {
+   "description": "This budget entry is create when following document got submitted",
+   "fieldname": "on_document_section",
+   "fieldtype": "Section Break",
+   "label": "On Document"
+  },
+  {
+   "fieldname": "column_break_lmpg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_vlav",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_wjcv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_sngb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "amount_section",
+   "fieldtype": "Section Break",
+   "label": "Amount"
+  },
+  {
+   "description": "The amount is budgeted or consumed agains this document",
+   "fieldname": "against_document_section",
+   "fieldtype": "Section Break",
+   "label": "Against Document"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "entry_date",
+   "fieldtype": "Date",
+   "label": "Entry Date",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-07 00:06:21.005890",
+ "modified": "2024-06-08 13:42:18.103887",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Entry",

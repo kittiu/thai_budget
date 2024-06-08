@@ -148,38 +148,38 @@ override_doctype_class = {
 # Hook on document methods and events
 
 doc_events = {
-	"Budget Control": {
-        "on_submit": [
-            "thai_budget.controllers.budget_controller.make_budget_entries",
-        ],
-        "on_cancel": [
-            "thai_budget.controllers.budget_controller.clear_budget_entries",
-        ]
-	},
-	"Material Request": {
-        "on_submit": [
-            "thai_budget.controllers.budget_controller.make_budget_entries",
-        ],
-        "on_cancel": [
-            "thai_budget.controllers.budget_controller.clear_budget_entries",
-        ]
-	},
-	"Purchase Order": {
-        "on_submit": [
-            "thai_budget.controllers.budget_controller.make_budget_entries",
-        ],
-        "on_cancel": [
-            "thai_budget.controllers.budget_controller.clear_budget_entries",
-        ]
-	},
-	"Purchase Invoice": {
-        "on_submit": [
-            "thai_budget.controllers.budget_controller.make_budget_entries",
-        ],
-        "on_cancel": [
-            "thai_budget.controllers.budget_controller.clear_budget_entries",
-        ]
-	}
+	# "Budget Control": {
+    #     "on_submit": [
+    #         "thai_budget.controllers.budget_controller.make_budget_entries",
+    #     ],
+    #     "on_cancel": [
+    #         "thai_budget.controllers.budget_controller.clear_budget_entries",
+    #     ]
+	# },
+	# "Material Request": {
+    #     "on_submit": [
+    #         "thai_budget.controllers.budget_controller.make_budget_entries",
+    #     ],
+    #     "on_cancel": [
+    #         "thai_budget.controllers.budget_controller.clear_budget_entries",
+    #     ]
+	# },
+	# "Purchase Order": {
+    #     "on_submit": [
+    #         "thai_budget.controllers.budget_controller.make_budget_entries",
+    #     ],
+    #     "on_cancel": [
+    #         "thai_budget.controllers.budget_controller.clear_budget_entries",
+    #     ]
+	# },
+	# "Purchase Invoice": {
+    #     "on_submit": [
+    #         "thai_budget.controllers.budget_controller.make_budget_entries",
+    #     ],
+    #     "on_cancel": [
+    #         "thai_budget.controllers.budget_controller.clear_budget_entries",
+    #     ]
+	# }
 }
 
 # Scheduled Tasks
@@ -223,7 +223,6 @@ doc_events = {
 # }
 
 override_doctype_dashboards = {
-	"Budget Control": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_budget_control",
 	"Material Request": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_material_request",
 	"Purchase Order": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_purchase_order",
 	"Purchase Invoice": "thai_budget.custom.dashboard_overrides.get_dashboard_data_for_purchase_invoice",

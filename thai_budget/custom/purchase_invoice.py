@@ -2,5 +2,5 @@ from erpnext.accounts.doctype.purchase_invoice.purchase_invoice import PurchaseI
 from thai_budget.controllers.budget_controller import BudgetController
 
 
-class PurchaseInvoiceTB(PurchaseInvoice, BudgetController):
+class PurchaseInvoiceTB(BudgetController, PurchaseInvoice):
     pass

@@ -3,7 +3,7 @@
 
 frappe.ui.form.on("Budget Control", {
 
-    refresh: function (frm) {
+    setup: function (frm) {
         frm.set_query("analytic_account", function () {
             return {
                 filters: {
@@ -18,10 +18,10 @@ frappe.ui.form.on("Budget Control", {
                 },
             };
         });
-        frm.set_query("budget_activity", "budget_control_lines", function(doc) {
+        frm.set_query("budget_activity", "items", function () {
             return {
                 filters: {
-                    company: doc.company
+                    company: frm.doc.company
                 }
             };
         });

@@ -2,5 +2,5 @@ from erpnext.stock.doctype.material_request.material_request import MaterialRequ
 from thai_budget.controllers.budget_controller import BudgetController
 
 
-class MaterialRequestTB(MaterialRequest, BudgetController):
+class MaterialRequestTB(BudgetController, MaterialRequest):
     pass
