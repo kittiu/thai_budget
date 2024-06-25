@@ -44,9 +44,32 @@ class BudgetControl(BudgetController):
         self.naming_series = f"{self.analytic_account}./.{self.budget_period}/.##"
 
     def validate(self):
+        self.validate_budget_conrol()
         self.validate_company_analytic()
         self.validate_company_budget_activity()
         self.update_budget_control()
+    
+    def validate_budget_conrol(self):
+        # No budget control duplication
+        doc = frappe.db.get_value(
+            self.doctype,
+            {
+                "analytic_type": self.analytic_type,
+                "analytic_account": self.analytic_account,
+                "budget_period": self.budget_period,
+                "name": ["!=", self.name],
+                "docstatus": ["!=", 2],
+            },
+            "name"
+        )
+        if doc:
+            frappe.throw(
+                _("Budget control for {0} already exists - {1}").format(
+                    self.budget_period,
+                    frappe.utils.get_link_to_form(self.doctype, doc)
+                ),
+                title=_("Duplication Error"),
+            )
 
     def validate_company_analytic(self):
         analytic_company = frappe.db.get_value(self.analytic_type, self.analytic_account, "company", cache=True)
