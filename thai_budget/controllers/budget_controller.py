@@ -27,9 +27,11 @@ class BudgetController(Document):
         )
         return sum(entries + against)
 
-    def on_submit(self):
+    def before_submit(self):
         make_budget_entries(self)
-        on_submit_check_budget(self)
+
+    def on_submit(self):
+        check_budget(self)
 
     def on_cancel(self):
         clear_budget_entries(self)
@@ -242,32 +244,64 @@ def get_matched_budget_controls(doc):
     return (budget_controls, unmatched_sets)
 
 
-def on_submit_check_budget(doc):
+def check_budget(doc):
     budget_controls, unmatched_sets = get_matched_budget_controls(doc)
-    over_budget_controls = []
+    bc_over_budget = []
+    # Annually Check
     for bc in budget_controls:
-        budget_control = frappe.get_doc("Budget Control", bc)
+        budget_control = frappe.get_cached_doc("Budget Control", bc)
         if budget_control.budget_balance < 0:
-            over_budget_controls.append(budget_control)
-    show_error_message(unmatched_sets, over_budget_controls)
+            bc_over_budget.append(budget_control)
+    show_error_message(bc_over_budget, unmatched_sets)
+    # Monthly Check
+    # TODO:
 
 
-def show_error_message(unmatched_sets, over_budget_controls):
-    error_list = []
-    for budget_control in over_budget_controls:
-        error_list.append(
-            _("<li><b>{0}</b> will be <b>{1:,.2f}</b> over budget - {2}</li>").format(
-            budget_control.analytic_account,
-            -budget_control.budget_balance,
-            frappe.utils.get_link_to_form("Budget Control", budget_control.name)
-        ))
-    for unmatched_set in unmatched_sets:
-        error_list.append(
-            _("<li><b>{0}</b> has no budget allocated and cannot continue</li>").format(
-                unmatched_set["analytic_account"]
-            )
+def show_error_message(budget_controls, unmatched_sets):
+    msg_list = []
+    stop = False
+    for bc in budget_controls:
+        disable_budget_check = frappe.get_cached_value(
+            "Budget Period",
+            bc.budget_period,
+            "disable_budget_check"
         )
-    if over_budget_controls or unmatched_sets:
-        errors = "".join(error_list)
+        if disable_budget_check: # Disable budget check at period level
+            continue
+        # Check budget cotnrol level
+        if not bc.get(frappe.flags.doc_budget_check.overall):
+            continue
+        if bc.get(frappe.flags.doc_budget_check.annually) == "Ignore":
+            continue
+        if bc.get(frappe.flags.doc_budget_check.annually) == "Stop":
+            stop = True  # To throw error
+        msg_list.append(
+            _("<li><b>{0}</b> will be <b>{1:,.2f}</b> over budget - {2}</li>").format(
+                bc.analytic_account, -bc.budget_balance,
+                frappe.utils.get_link_to_form("Budget Control", bc.name)
+            ))
+    for unmatched_set in unmatched_sets:
+        disable_budget_check = frappe.get_cached_value(
+            "Budget Period",
+            {
+                "period_start_date": ["<=", unmatched_set["entry_date"]],
+                "period_end_date": [">=", unmatched_set["entry_date"]]
+            },
+            "disable_budget_check"
+        )
+        if disable_budget_check:
+            continue
+        else:
+            stop = True
+            msg_list.append(
+                _("<li><b>{0}</b> has no budget allocated and cannot continue</li>").format(
+                    unmatched_set["analytic_account"]
+                )
+            )
+    if msg_list:
+        errors = "".join(msg_list)
         error_message = _("After submit this document,<ul>{0}</ul>").format(errors)
-        frappe.throw(error_message)
+        if stop:
+            frappe.throw(error_message, _("Error"))
+        else:
+            frappe.msgprint(error_message, _("Warning"))

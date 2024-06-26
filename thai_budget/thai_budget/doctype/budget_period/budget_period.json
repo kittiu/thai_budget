@@ -13,6 +13,7 @@
   "column_break_khfb",
   "company",
   "budget_account",
+  "disable_budget_check",
   "create_budget_control_status",
   "error_message",
   "section_break_6",
@@ -180,11 +181,18 @@
    "fieldtype": "Small Text",
    "label": "Error Message",
    "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Stop budget check entirely for this period.",
+   "fieldname": "disable_budget_check",
+   "fieldtype": "Check",
+   "label": "Disable Budget Check"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-25 18:19:19.545899",
+ "modified": "2024-06-26 16:59:51.051198",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Period",
