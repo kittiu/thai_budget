@@ -2,7 +2,7 @@ frappe.ui.form.on("Purchase Invoice", {
     refresh: function(frm) {
         if (frm.doc.docstatus === 1) {
 			frm.add_custom_button(
-				__("View Budget Entry"),
+				__("View Budget Monitor"),
 				function () {
 					frappe.route_options = {
                         company: frm.doc.company,

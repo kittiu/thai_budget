@@ -1,0 +1,51 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:procurement_act",
+ "creation": "2024-12-03 23:50:21.142076",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "procurement_act",
+  "rules"
+ ],
+ "fields": [
+  {
+   "fieldname": "procurement_act",
+   "fieldtype": "Data",
+   "label": "Procurement Act",
+   "unique": 1
+  },
+  {
+   "fieldname": "rules",
+   "fieldtype": "Table",
+   "label": "Rules",
+   "options": "Procurement Act Rule"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-12-03 23:54:54.422613",
+ "modified_by": "Administrator",
+ "module": "Thai Budget",
+ "name": "Procurement Act",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -41,7 +41,7 @@ class BudgetControl(BudgetController):
         return sum(entries)
 
     def before_naming(self):
-        self.naming_series = f"{self.analytic_account}./.{self.budget_period}/.##"
+        self.naming_series = f"BC-{self.budget_period}-.###"
 
     def validate(self):
         self.validate_budget_conrol()

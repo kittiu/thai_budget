@@ -53,6 +53,7 @@ def columns_normal():
 			"fieldname": "analytic_account",
 			"fieldtype": "Dynamic Link",
 			"options": "analytic_type",
+			"width": 300,
 		},
 		{
 			"label": _("Budget Activity"),
@@ -100,6 +101,7 @@ def columns_pivot(filters):
 				"fieldname": "analytic_account",
 				"fieldtype": "Dynamic Link",
 				"options": "analytic_type",
+				"width": 300,
 			})
 		if frappe.scrub(group_by) == "voucher_no":
 			columns.append({
@@ -169,6 +171,10 @@ def prepare_data(data):
 def prepare_pivot_data(data, filters):
 	if not filters.get("pivot_table"):
 		return data
+	if not filters.get("show_columns") and not filters.get("group_by"):
+		return ([], [])
+	if not data:
+		return ([], [])
 	df = pd.DataFrame(data)
 	gb_columns = [frappe.scrub(x) for x in filters.get("group_by", [])]
 	pivot_table = pd.pivot_table(

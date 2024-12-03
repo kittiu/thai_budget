@@ -2,20 +2,30 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 
 class BudgetEntry(Document):
 
 	def validate(self):
+		self.validate_required_fields()
 		self.update_balance()
 		self.update_date()
 		self.update_voucher_no()
+
+	def validate_required_fields(self):
+		if not self.analytic_account:
+			frappe.throw(_("Analytic Account, i.e., Project or Cost Center is required"))
+		if self.entry_type != "Budget Plan" and not self.budget_activity:
+			frappe.throw(_("Budget Activity is required"))
 
 	def update_balance(self):
 		self.balance = self.debit - self.credit
 
 	def update_date(self):
+		if self.edit_entry_date:
+			return
 		# Entry date is based on transaction date of the voucher
 		DATES = {
 			"Budget Control": "period_start_date",

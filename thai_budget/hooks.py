@@ -22,6 +22,17 @@ fixtures = [
                     "Purchase Order-budget_balance",
                     "Purchase Invoice-budget_status",
                     "Purchase Invoice-budget_balance",
+                    "Material Request-custom_procurement_method",
+                    "Material Request-custom_purchase_type",
+                    "Material Request-custom_column_break_gr4nl",
+                    "Material Request-custom_column_break_xx6cp",
+                    "Material Request-custom_procurement_type",
+                    "Material Request-custom_procurement",
+                    "Material Request-custom_work_acceptance_committees",
+                    "Material Request-custom_work_acceptance",
+                    "Material Request-custom_procurement_committees",
+                    "Material Request-custom_procurement",
+                    "Material Request-custom_committee",
                 ]
             ]
         ]

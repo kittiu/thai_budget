@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:BE{########}",
  "creation": "2024-06-05 12:39:10.363452",
@@ -17,6 +18,7 @@
   "budget_analytic_activity_section",
   "entry_type",
   "entry_date",
+  "edit_entry_date",
   "column_break_betp",
   "analytic_type",
   "analytic_account",
@@ -139,7 +141,8 @@
    "fieldname": "budget_activity",
    "fieldtype": "Link",
    "label": "Budget Activity",
-   "options": "Budget Activity"
+   "options": "Budget Activity",
+   "reqd": 1
   },
   {
    "depends_on": "eval:!['Budget Plan', 'Budget Control'].includes(doc.entry_type)",
@@ -203,6 +206,7 @@
    "fieldname": "entry_date",
    "fieldtype": "Date",
    "label": "Entry Date",
+   "read_only_depends_on": "eval:!doc.edit_entry_date",
    "reqd": 1
   },
   {
@@ -213,11 +217,18 @@
    "read_only": 1,
    "reqd": 1,
    "search_index": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "edit_entry_date",
+   "fieldtype": "Check",
+   "label": "Edit Entry Date"
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_calendar_and_gantt": 1,
  "links": [],
- "modified": "2024-06-09 11:06:29.618724",
+ "modified": "2024-12-03 19:16:11.007620",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Entry",

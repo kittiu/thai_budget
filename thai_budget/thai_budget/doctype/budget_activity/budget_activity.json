@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "field:budget_activity",
  "creation": "2024-04-28 12:03:13.854634",
  "doctype": "DocType",
@@ -46,7 +47,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-28 12:37:08.479446",
+ "modified": "2024-12-02 18:17:05.888372",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Activity",

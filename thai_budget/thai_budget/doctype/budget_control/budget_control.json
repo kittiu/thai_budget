@@ -45,7 +45,6 @@
   {
    "fieldname": "company",
    "fieldtype": "Link",
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Company",
    "options": "Company",
@@ -184,6 +183,7 @@
    "in_standard_filter": 1,
    "label": "Budget Period",
    "options": "Budget Period",
+   "read_only_depends_on": "eval:!doc.__unsaved;",
    "reqd": 1
   },
   {
@@ -196,6 +196,8 @@
   {
    "fieldname": "analytic_account",
    "fieldtype": "Dynamic Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Analytic Account",
    "options": "analytic_type",
    "reqd": 1,
@@ -218,6 +220,7 @@
    "description": "Sum of planned amount from budget lines",
    "fieldname": "amount",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Budget Amount",
    "read_only": 1
   },
@@ -282,7 +285,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-08 14:41:13.345565",
+ "modified": "2024-12-03 09:40:57.262468",
  "modified_by": "Administrator",
  "module": "Thai Budget",
  "name": "Budget Control",
@@ -309,5 +312,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "analytic_account",
  "track_changes": 1
 }
